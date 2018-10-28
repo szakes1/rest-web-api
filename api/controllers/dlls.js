@@ -76,6 +76,7 @@ exports.dlls_add_new = (req, res, next) => {
             message: 'DLL successfully uploaded!',
             _id: result._id,
             name: result.name,
+            dllFile: result.dllFile,
             request: {
                 type: 'GET',
                 url: `http://localhost:3000/api/dlls/${result._id}`
