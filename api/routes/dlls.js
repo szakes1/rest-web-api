@@ -32,7 +32,7 @@ const upload = multer({
 
 
 router.get('/', dllsController.dlls_get_all);
-// router.get('/:dllId', dllsController.dlls_get_one);
+router.get('/:dllId', dllsController.dlls_get_one);
 
 router.post('/', upload.single('dllFile'), dllsController.dlls_add_new);
 

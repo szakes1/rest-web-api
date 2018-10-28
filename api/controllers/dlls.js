@@ -32,7 +32,30 @@ exports.dlls_get_all = (req, res, next) => {
     );
 }
 
-// exports.dlls_get_one = async (req, res, next) => {}
+exports.dlls_get_one = (req, res, next) => {
+    const id = req.params.dllId
+    DLL
+    .findById(id)
+    .select('name _id dllFile')
+    .exec()
+    .then(doc => {
+        console.log('From database: ', doc);
+        if (doc){
+            res.status(200).json({
+                dll: doc,
+                request: {
+                    type: 'GET',
+                    url: `http://localhost:3000/api/dlls/${doc._id}`
+                }
+            });
+        } else {
+            res.status(404).json({
+                message: 'No valid entry was found for a provided ID'
+            });
+        }
+    })
+
+}
 
 exports.dlls_add_new = (req, res, next) => {
     const entry = new DLL({
