@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const DLL = require('../models/dll');
 
+
+// GET requests
 exports.dlls_get_all = (req, res, next) => {
     DLL
     .find()
@@ -54,9 +56,11 @@ exports.dlls_get_one = (req, res, next) => {
             });
         }
     })
-
 }
+//
 
+
+// POST requests
 exports.dlls_add_new = (req, res, next) => {
     const entry = new DLL({
         _id: new mongoose.Types.ObjectId,
