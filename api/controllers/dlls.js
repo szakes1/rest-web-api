@@ -65,7 +65,7 @@ exports.dlls_add_new = (req, res, next) => {
     const entry = new DLL({
         _id: new mongoose.Types.ObjectId,
         name: req.body.name,
-        dllFile: req.file.path
+        dllFile: `/uploads/${req.file.originalname}`
     });
 
     entry
