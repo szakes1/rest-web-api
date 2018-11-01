@@ -31,6 +31,7 @@ const upload = multer({
 ///
 
 
+// Routes
 router.get('/', dllsController.dlls_get_all);
 router.get('/:dllId', dllsController.dlls_get_one);
 
