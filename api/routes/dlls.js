@@ -36,4 +36,6 @@ router.get('/:dllId', dllsController.dlls_get_one);
 
 router.post('/', upload.single('dllFile'), dllsController.dlls_add_new);
 
+router.delete('/:dllId', dllsController.dlls_delete_one);
+
 module.exports = router;

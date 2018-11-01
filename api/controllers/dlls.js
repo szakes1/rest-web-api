@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const DLL = require('../models/dll');
+const fs = require('fs');
 
 
 // GET requests
@@ -65,7 +66,7 @@ exports.dlls_add_new = (req, res, next) => {
     const entry = new DLL({
         _id: new mongoose.Types.ObjectId,
         name: req.body.name,
-        dllFile: `/uploads/${req.file.originalname}`
+        dllFile: `uploads/${req.file.originalname}`
     });
 
     entry
@@ -91,4 +92,51 @@ exports.dlls_add_new = (req, res, next) => {
             error: err
         });
     });
+}
+
+// Delete requests
+
+exports.dlls_delete_one = async (req, res, next) => {
+    const id = req.params.dllId;
+
+    // Remove DLL file from a storage
+
+    await DLL.findById(id, (err, doc) => {
+        if (!err) {
+            fs.unlink(doc.dllFile, (err) => {
+                if (!err) {
+                    console.log("File successfully deleted!");
+                } else {
+                    res.status(500).json({
+                        error: err
+                    });
+                }
+            });
+        } else {
+            res.status(500).json({
+                error: err
+            });
+        }
+    });
+
+    // Remove entry for the database
+
+    await DLL.deleteOne({ _id: id }, (err, result) => {
+        if (!err) {
+            res.status(200).json({
+                message: 'Product successfully deleted!',
+                request: {
+                    type: 'POST',
+                    url: 'http://localhost:3000/api/dlls',
+                    body: { name: 'String', dllFile: 'String' }
+                }
+            });
+        } else {
+            console.log(err);
+            res.status(500).json({
+                error: err
+            });
+        }
+    });
+    
 }
