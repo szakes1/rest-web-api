@@ -31,12 +31,14 @@ const upload = multer({
 ///
 
 
-// Routes
+// GET routes
 router.get('/', dllsController.dlls_get_all);
 router.get('/:dllId', dllsController.dlls_get_one);
 
+// POST routes
 router.post('/', upload.single('dllFile'), dllsController.dlls_add_new);
 
+// DELETE routes
 router.delete('/:dllId', dllsController.dlls_delete_one);
 
 module.exports = router;
