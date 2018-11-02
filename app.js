@@ -18,7 +18,7 @@ mongoose.connect(process.env.DATABASE, {
 mongoose.Promise = global.Promise;
 
 // log all requests in a console
-app.use(morgan('dev'));
+app.use(morgan('tiny'));
 
 // Set 'public' as a static directory
 app.use('/', express.static('public'));
