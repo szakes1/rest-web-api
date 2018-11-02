@@ -42,7 +42,6 @@ exports.dlls_get_one = (req, res, next) => {
     .select('name _id dllFile')
     .exec()
     .then(doc => {
-        console.log('From database: ', doc);
         if (doc){
             res.status(200).json({
                 dll: doc,
@@ -72,7 +71,6 @@ exports.dlls_add_new = (req, res, next) => {
     entry
     .save()
     .then(result => {
-        console.log(result);
         res.status(201).json({
             message: 'DLL successfully uploaded!',
             _id: result._id,
