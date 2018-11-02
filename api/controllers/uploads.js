@@ -1,5 +1,18 @@
-module.exports = (req, res, next) => {
-    const path = req.params.filePath
+const DLL = require('../models/dll');
 
-    res.download(`./uploads/${path}`);
+module.exports = (req, res, next) => {
+    const id = req.params.dllId
+
+    DLL
+    .findById(id)
+    .exec()
+    .then(doc => {
+        res.download(`./${doc.dllFile}`);
+    })
+    .catch(err => {
+        res.status(500).json({
+            error: err
+        });
+    });
+
 }
