@@ -38,6 +38,9 @@ router.get('/:dllId', dllsController.dlls_get_one);
 // POST routes
 router.post('/', upload.single('dllFile'), dllsController.dlls_add_new);
 
+// PUT routes
+router.put('/:dllId', upload.single('dllFile'), dllsController.dlls_update_one);
+
 // DELETE routes
 router.delete('/:dllId', dllsController.dlls_delete_one);
 

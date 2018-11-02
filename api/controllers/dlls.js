@@ -94,7 +94,34 @@ exports.dlls_add_new = (req, res, next) => {
     });
 }
 
-// Delete requests
+// PUT
+exports.dlls_update_one = (req, res, next) => {
+    const id = req.params.dllId
+    const name = req.body.name
+    const dllFile = `uploads/${req.file.originalname}`
+    
+
+    DLL
+    .findOneAndUpdate(id, { $set: { name, dllFile } })
+    .exec()
+    .then(result => {
+        res.status(200).json({
+            message: 'File successfully updated!',
+            request: {
+                type: 'GET',
+                url: `http://localhost:3000/api/dlls/${result._id}`
+            }
+        });
+    })
+    .catch(err => {
+        res.status(500).json({
+            error: err
+        });
+    });
+}
+
+
+// DELETE requests
 
 exports.dlls_delete_one = async (req, res, next) => {
     const id = req.params.dllId;
@@ -124,7 +151,7 @@ exports.dlls_delete_one = async (req, res, next) => {
     await DLL.deleteOne({ _id: id }, (err, result) => {
         if (!err) {
             res.status(200).json({
-                message: 'Product successfully deleted!',
+                message: 'DLL successfully deleted!',
                 request: {
                     type: 'POST',
                     url: 'http://localhost:3000/api/dlls',
