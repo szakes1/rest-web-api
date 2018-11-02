@@ -44,7 +44,7 @@ app.use((req, res, next) => {
 
 // Handle routes which should handle requests
 app.use('/', websiteRouter);
-app.use('/uploads', uploadsRouter);
+app.use('/api/uploads', uploadsRouter);
 app.use('/api/dlls', dllsRouter);
 app.use('/api/users', usersRouter);
 
