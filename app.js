@@ -6,10 +6,13 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 
 const websiteRouter = require('./api/routes/website');
+const uploadsRouter = require('./api/routes/uploads');
 const dllsRouter = require('./api/routes/dlls');
+const usersRouter = require('./api/routes/users');
 
 // Connect to a database
 mongoose.connect(process.env.DATABASE, {
+    useCreateIndex: true,
     useNewUrlParser: true
 });
 mongoose.Promise = global.Promise;
@@ -19,8 +22,6 @@ app.use(morgan('dev'));
 
 // Set 'public' as a static directory
 app.use('/', express.static('public'));
-
-app.use('/uploads', express.static('uploads'));
 
 // Parse the JSON data from a POST request
 app.use(bodyParser.urlencoded({extended: false}));
@@ -43,7 +44,9 @@ app.use((req, res, next) => {
 
 // Handle routes which should handle requests
 app.use('/', websiteRouter);
+app.use('/uploads', uploadsRouter);
 app.use('/api/dlls', dllsRouter);
+app.use('/api/users', usersRouter);
 
 
 

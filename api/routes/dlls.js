@@ -1,6 +1,7 @@
 const multer = require('multer');
 const express = require('express');
 const router = express.Router();
+const checkAuth = require('../middleware/checkAuth');
 const dllsController = require('../controllers/dlls');
 
 /// Handle uploaded files with multer
@@ -32,16 +33,16 @@ const upload = multer({
 
 
 // GET routes
-router.get('/', dllsController.dlls_get_all);
-router.get('/:dllId', dllsController.dlls_get_one);
+router.get('/', checkAuth, dllsController.dlls_get_all);
+router.get('/:dllId', checkAuth,dllsController.dlls_get_one);
 
 // POST routes
-router.post('/', upload.single('dllFile'), dllsController.dlls_add_new);
+router.post('/', checkAuth, upload.single('dllFile'), dllsController.dlls_add_new);
 
 // PUT routes
-router.put('/:dllId', upload.single('dllFile'), dllsController.dlls_update_one);
+router.put('/:dllId', checkAuth, upload.single('dllFile'), dllsController.dlls_update_one);
 
 // DELETE routes
-router.delete('/:dllId', dllsController.dlls_delete_one);
+router.delete('/:dllId', checkAuth, dllsController.dlls_delete_one);
 
 module.exports = router;

@@ -94,7 +94,7 @@ exports.dlls_add_new = (req, res, next) => {
     });
 }
 
-// PUT
+// PUT - doesn't work completely
 exports.dlls_update_one = (req, res, next) => {
     const id = req.params.dllId
     const name = req.body.name
@@ -134,13 +134,13 @@ exports.dlls_delete_one = async (req, res, next) => {
                 if (!err) {
                     console.log("File successfully deleted!");
                 } else {
-                    res.status(500).json({
+                    return res.status(500).json({
                         error: err
                     });
                 }
             });
         } else {
-            res.status(500).json({
+            return res.status(500).json({
                 error: err
             });
         }
@@ -150,7 +150,7 @@ exports.dlls_delete_one = async (req, res, next) => {
 
     await DLL.deleteOne({ _id: id }, (err, result) => {
         if (!err) {
-            res.status(200).json({
+            return res.status(200).json({
                 message: 'DLL successfully deleted!',
                 request: {
                     type: 'POST',
@@ -160,7 +160,7 @@ exports.dlls_delete_one = async (req, res, next) => {
             });
         } else {
             console.log(err);
-            res.status(500).json({
+            return res.status(500).json({
                 error: err
             });
         }
