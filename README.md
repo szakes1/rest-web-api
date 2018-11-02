@@ -60,9 +60,90 @@ After getting the token, you can access every route in API if you pass the token
 
 
 
-## 2. Make a request
+## 2. Make a request: GET, POST, PUT, DELETE
 
 If you have the token, you can now access a route you desire. 
+
+
+
+## GET
+
+#### View available DLLs
+
+To view available DLLs, execute GET request to https://twrsquad.pl/api/dlls with a provided token as a request header.
+
+
+
+Sample response:
+
+```json
+{
+    "number_of_dlls": 2,
+    "dlls": [
+        {
+            "name": "Keylogger",
+            "dllFile": "uploads/adodb.dll",
+            "_id": "5bdcb3cee1b50e362995882c",
+            "request": {
+                "type": "GET",
+                "url": "https://twrsquad.pl/api/dlls/5bdcb3cee1b50e362995882c"
+            }
+        },
+        {
+            "name": "Plug-in",
+            "dllFile": "uploads/msdia80.dll",
+            "_id": "5bdcb3fce1b50e362995882d",
+            "request": {
+                "type": "GET",
+                "url": "https://twrsquad.pl/api/dlls/5bdcb3fce1b50e362995882d"
+            }
+        }
+    ]
+}
+```
+
+
+
+
+
+If there are no DLLs, you will see a response like that:
+
+```json
+{
+    "number_of_dlls": 0,
+    "dlls": []
+}
+```
+
+
+
+### View one DLL
+
+To view one DLL, execute GET request to https://twrsquad.pl/api/dlls/:dllId with a token as a request header.
+
+> :dllId is in fact an ID of a DLL
+
+
+
+Sample response: 
+
+```json
+{
+    "dll": {
+        "_id": "5bdcb3cee1b50e362995882c",
+        "name": "Keylogger",
+        "dllFile": "uploads/adodb.dll"
+    },
+    "request": {
+        "type": "GET",
+        "url": "https://twrsquad.pl/api/dlls/5bdcb3cee1b50e362995882c"
+    }
+}
+```
+
+
+
+## POST 
 
 
 
