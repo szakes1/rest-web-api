@@ -18,7 +18,7 @@ exports.dlls_get_all = (req, res, next) => {
                     _id: doc._id,
                     request: {
                         type: 'GET',
-                        url: `http://localhost:3000/api/dlls/${doc._id}`
+                        url: `https://twrsquad.pl/api/dlls/${doc._id}`
                     }
                 }
             })
@@ -48,7 +48,7 @@ exports.dlls_get_one = (req, res, next) => {
                 dll: doc,
                 request: {
                     type: 'GET',
-                    url: `http://localhost:3000/api/dlls/${doc._id}`
+                    url: `https://twrsquad.pl/api/dlls/${doc._id}`
                 }
             });
         } else {
@@ -80,7 +80,7 @@ exports.dlls_add_new = (req, res, next) => {
             dllFile: result.dllFile,
             request: {
                 type: 'GET',
-                url: `http://localhost:3000/api/dlls/${result._id}`
+                url: `https://twrsquad.pl/api/dlls/${result._id}`
             }
 
         });
@@ -109,7 +109,7 @@ exports.dlls_update_one = (req, res, next) => {
             message: 'File successfully updated!',
             request: {
                 type: 'GET',
-                url: `http://localhost:3000/api/dlls/${result._id}`
+                url: `https://twrsquad.pl/api/dlls/${result._id}`
             }
         });
     })
@@ -154,7 +154,7 @@ exports.dlls_delete_one = async (req, res, next) => {
                 message: 'DLL successfully deleted!',
                 request: {
                     type: 'POST',
-                    url: 'http://localhost:3000/api/dlls',
+                    url: 'https://twrsquad.pl/api/dlls',
                     body: { name: 'String', dllFile: 'String' }
                 }
             });
