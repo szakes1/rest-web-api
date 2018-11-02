@@ -16,9 +16,15 @@ exports.dlls_get_all = (req, res, next) => {
                     name: doc.name,
                     dllFile: doc.dllFile,
                     _id: doc._id,
-                    request: {
+                    get_info: {
                         type: 'GET',
+                        description: 'Get information about this DLL',
                         url: `https://twrsquad.pl/api/dlls/${doc._id}`
+                    },
+                    download_file: {
+                        type: 'GET',
+                        description: 'Download DLL file using this URL',
+                        url: `https://twrsquad.pl/api/uploads/${doc._id}`
                     }
                 }
             })
@@ -45,9 +51,15 @@ exports.dlls_get_one = (req, res, next) => {
         if (doc){
             res.status(200).json({
                 dll: doc,
-                request: {
+                get_info: {
                     type: 'GET',
+                    description: 'Get information about this DLL',
                     url: `https://twrsquad.pl/api/dlls/${doc._id}`
+                },
+                download_file: {
+                    type: 'GET',
+                    description: 'Download DLL file using this URL',
+                    url: `https://twrsquad.pl/api/uploads/${doc._id}`
                 }
             });
         } else {
@@ -65,7 +77,7 @@ exports.dlls_add_new = (req, res, next) => {
     const entry = new DLL({
         _id: new mongoose.Types.ObjectId,
         name: req.body.name,
-        dllFile: `uploads/${req.file.originalname}`
+        dllFile: req.file.path
     });
 
     entry
@@ -76,8 +88,9 @@ exports.dlls_add_new = (req, res, next) => {
             _id: result._id,
             name: result.name,
             dllFile: result.dllFile,
-            request: {
+            get_info: {
                 type: 'GET',
+                description: 'Get information about this DLL',
                 url: `https://twrsquad.pl/api/dlls/${result._id}`
             }
 
@@ -96,7 +109,7 @@ exports.dlls_add_new = (req, res, next) => {
 exports.dlls_update_one = (req, res, next) => {
     const id = req.params.dllId
     const name = req.body.name
-    const dllFile = `uploads/${req.file.originalname}`
+    const dllFile = req.file.path
     
 
     DLL
@@ -105,8 +118,9 @@ exports.dlls_update_one = (req, res, next) => {
     .then(result => {
         res.status(200).json({
             message: 'File successfully updated!',
-            request: {
+            get_info: {
                 type: 'GET',
+                description: 'Get information about this DLL',
                 url: `https://twrsquad.pl/api/dlls/${result._id}`
             }
         });
@@ -150,8 +164,9 @@ exports.dlls_delete_one = async (req, res, next) => {
         if (!err) {
             return res.status(200).json({
                 message: 'DLL successfully deleted!',
-                request: {
+                add_new: {
                     type: 'POST',
+                    description: 'Add new DLL using this URL and Schema',
                     url: 'https://twrsquad.pl/api/dlls',
                     body: { name: 'String', dllFile: 'String' }
                 }
