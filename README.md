@@ -54,9 +54,9 @@ Sample response:
 
 After getting the token, you can access every route in API if you pass the token in a request header as follows:
 
-| KEY           | VALUE          |
-| ------------- | -------------- |
-| Authorization | Bearer <token> |
+| KEY           | VALUE            |
+| ------------- | ---------------- |
+| Authorization | Bearer __token__ |
 
 
 
