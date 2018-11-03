@@ -164,7 +164,140 @@ Sample response:
 If the DLL was not found, it will throw an error with status code: 404. 
 
 ```json
+{
+    "message": "No valid entry was found for a provided ID"
+}
+```
 
+
+
+Or with status code 500:
+
+```json
+{
+    "error": {
+        "message": "Cast to ObjectId failed for value \"5bdce9b10829d603d0f6248g\" at path \"_id\" for model \"DLL\"",
+        "name": "CastError",
+        "stringValue": "\"5bdce9b10829d603d0f6248g\"",
+        "kind": "ObjectId",
+        "value": "5bdce9b10829d603d0f6248g",
+        "path": "_id"
+    }
+}
+```
+
+
+
+## POST
+
+To upload a new DLL you're required to send a multipart form instead of a JSON file. 
+
+You have to add `enctype="multipart/form-data"` to your form to make it work. 
+
+
+
+Sample form: 
+
+```html
+<form action="https://twrsquad.pl/api/dlls" method="post" enctype="multipart/form-data">
+    <input type="text" name="name" />
+  <input type="file" name="dllFile" />
+</form>
+```
+
+
+
+To add a new DLL, execute POST request to https://twrsquad.pl/api/dlls as a form with __multipart/form-data__. 
+
+
+
+| KEY     | VALUE           |
+| ------- | --------------- |
+| name    | name_of_the_DLL |
+| dllFile | your_DLL_file   |
+
+
+
+Sample response after upload: 
+
+```json
+{
+    "message": "DLL successfully uploaded!",
+    "_id": "5bdd8ad668a6d80712e67faa",
+    "name": "Nowy pluginek",
+    "dllFile": "uploads/1541245654713msdia80.dll",
+    "get_info": {
+        "type": "GET",
+        "description": "Get information about this DLL",
+        "url": "https://twrsquad.pl/api/dlls/5bdd8ad668a6d80712e67faa"
+    }
+}
+```
+
+
+
+
+
+__Don't forget about the token!__
+
+
+
+## PUT - works only in 90%, use at own risk!
+
+To update a file you also need to send the multipart form with the keys and values specified above. 
+
+
+
+To replace a file, you need to execute a PUT request to https://twrsquad.pl/api/dlls/:dllId with a multipart form. 
+
+Remember that __:dllId__ is an ID of the DLL you want to update. 
+
+
+
+It works almost the same as the POST request. 
+
+
+
+Sample response:
+
+```json
+{
+    "message": "File successfully updated!",
+    "get_info": {
+        "type": "GET",
+        "description": "Get information about this DLL",
+        "url": "https://twrsquad.pl/api/dlls/5bdce9b10829d603d0f6248b"
+    }
+}
+```
+
+
+
+## DELETE
+
+To delete a DLL, you need to execute the DELETE request to https://twrsquad.p/api/dlls/:dllId 
+
+> :dllId is an ID of the DLL you'd like to delete 
+
+It will delete both entry from the database and the file you uploaded. 
+
+
+
+Sample response: 
+
+```json
+{
+    "message": "DLL successfully deleted!",
+    "add_new": {
+        "type": "POST",
+        "description": "Add new DLL using this URL and Schema",
+        "url": "https://twrsquad.pl/api/dlls",
+        "body": {
+            "name": "String",
+            "dllFile": "String"
+        }
+    }
+}
 ```
 
 
