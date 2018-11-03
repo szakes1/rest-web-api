@@ -68,6 +68,11 @@ exports.dlls_get_one = (req, res, next) => {
             });
         }
     })
+    .catch(err => {
+        res.status(500).json({
+            error: err
+        });
+    });
 }
 //
 
