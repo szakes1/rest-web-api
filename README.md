@@ -82,20 +82,32 @@ Sample response:
     "dlls": [
         {
             "name": "Keylogger",
-            "dllFile": "uploads/adodb.dll",
-            "_id": "5bdcb3cee1b50e362995882c",
-            "request": {
+            "dllFile": "uploads/1541204401772adodb.dll",
+            "_id": "5bdce9b10829d603d0f6248b",
+            "get_info": {
                 "type": "GET",
-                "url": "https://twrsquad.pl/api/dlls/5bdcb3cee1b50e362995882c"
+                "description": "Get information about this DLL",
+                "url": "https://twrsquad.pl/api/dlls/5bdce9b10829d603d0f6248b"
+            },
+            "download_file": {
+                "type": "GET",
+                "description": "Download DLL file using this URL",
+                "url": "https://twrsquad.pl/api/uploads/5bdce9b10829d603d0f6248b"
             }
         },
         {
             "name": "Plug-in",
-            "dllFile": "uploads/msdia80.dll",
-            "_id": "5bdcb3fce1b50e362995882d",
-            "request": {
+            "dllFile": "uploads/1541204512156msdia80.dll",
+            "_id": "5bdcea200829d603d0f6248c",
+            "get_info": {
                 "type": "GET",
-                "url": "https://twrsquad.pl/api/dlls/5bdcb3fce1b50e362995882d"
+                "description": "Get information about this DLL",
+                "url": "https://twrsquad.pl/api/dlls/5bdcea200829d603d0f6248c"
+            },
+            "download_file": {
+                "type": "GET",
+                "description": "Download DLL file using this URL",
+                "url": "https://twrsquad.pl/api/uploads/5bdcea200829d603d0f6248c"
             }
         }
     ]
@@ -130,20 +142,30 @@ Sample response:
 ```json
 {
     "dll": {
-        "_id": "5bdcb3cee1b50e362995882c",
+        "_id": "5bdce9b10829d603d0f6248b",
         "name": "Keylogger",
-        "dllFile": "uploads/adodb.dll"
+        "dllFile": "uploads/1541204401772adodb.dll"
     },
-    "request": {
+    "get_info": {
         "type": "GET",
-        "url": "https://twrsquad.pl/api/dlls/5bdcb3cee1b50e362995882c"
+        "description": "Get information about this DLL",
+        "url": "https://twrsquad.pl/api/dlls/5bdce9b10829d603d0f6248b"
+    },
+    "download_file": {
+        "type": "GET",
+        "description": "Download DLL file using this URL",
+        "url": "https://twrsquad.pl/api/uploads/5bdce9b10829d603d0f6248b"
     }
 }
 ```
 
 
 
-## POST 
+If the DLL was not found, it will throw an error with status code: 404. 
+
+```json
+
+```
 
 
 
