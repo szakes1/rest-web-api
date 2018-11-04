@@ -28,7 +28,7 @@ To log-in, simply execute the POST method to https://twrsquad.pl/api/users/login
 ```json
 {
     "email": "<your_email_address>",
-    "passsword": "<your_password>"
+    "password": "<your_password>"
 }
 ```
 
