@@ -34,7 +34,7 @@ const upload = multer({
 
 // GET routes
 router.get('/', checkAuth, dllsController.dlls_get_all);
-router.get('/:dllId', checkAuth,dllsController.dlls_get_one);
+router.get('/:dllId', checkAuth, dllsController.dlls_get_one);
 
 // POST routes
 router.post('/', checkAuth, upload.single('dllFile'), dllsController.dlls_add_new);
