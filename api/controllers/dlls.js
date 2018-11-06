@@ -157,7 +157,7 @@ exports.dlls_delete_one = (req, res, next) => {
     .then(() => DLL.deleteOne({ _id: id }, (err, result) => {
         if (!err) {
             return res.status(200).json({
-                message: 'File siccessfully deleted!',
+                message: 'File successfully deleted!',
                 add_new: {
                     type: 'POST',
                     description: 'Upload a new file using this URL and Schema',
