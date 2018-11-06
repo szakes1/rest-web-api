@@ -140,48 +140,41 @@ exports.dlls_update_one = (req, res, next) => {
 
 // DELETE requests
 
-exports.dlls_delete_one = async (req, res, next) => {
+exports.dlls_delete_one = (req, res, next) => {
     const id = req.params.dllId;
 
-    // Remove DLL file from a storage
+    // Remove a DLL file and its entry in the database
 
-    await DLL.findById(id, (err, doc) => {
-        if (!err) {
-            fs.unlink(doc.dllFile, (err) => {
-                if (!err) {
-                    console.log("File successfully deleted!");
-                } else {
-                    return res.status(500).json({
-                        error: err
-                    });
-                }
-            });
-        } else {
-            return res.status(500).json({
-                error: err
-            });
-        }
-    });
-
-    // Remove entry for the database
-
-    await DLL.deleteOne({ _id: id }, (err, result) => {
+    DLL
+    .findById(id)
+    .exec()
+    .then(doc => {
+        fs.unlink(doc.dllFile, (err) => {
+            if (err) throw err;
+            console.log('File successfully deleted!');
+        });
+    })
+    .then(() => DLL.deleteOne({ _id: id }, (err, result) => {
         if (!err) {
             return res.status(200).json({
-                message: 'DLL successfully deleted!',
+                message: 'File siccessfully deleted!',
                 add_new: {
                     type: 'POST',
-                    description: 'Add new DLL using this URL and Schema',
+                    description: 'Upload a new file using this URL and Schema',
                     url: 'https://twrsquad.pl/api/dlls',
                     body: { name: 'String', dllFile: 'String' }
                 }
             });
         } else {
-            console.log(err);
             return res.status(500).json({
                 error: err
             });
         }
+    }))
+    .catch(err => {
+        res.status(500).json({
+            error: err
+        });
     });
     
 }
